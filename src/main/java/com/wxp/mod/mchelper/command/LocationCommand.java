@@ -1,13 +1,10 @@
 package com.wxp.mod.mchelper.command;
 
 import com.google.common.collect.Lists;
-import com.wxp.mod.mchelper.McHelper;
 import com.wxp.mod.mchelper.capability.LocationCapability;
 import com.wxp.mod.mchelper.domain.Location;
 import com.wxp.mod.mchelper.helper.LocationHelper;
 import com.wxp.mod.mchelper.manager.CapabilityManager;
-import com.wxp.mod.mchelper.manager.NetworkManager;
-import com.wxp.mod.mchelper.network.LocationCapabilitySyncMessage;
 import net.minecraft.command.*;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -18,10 +15,9 @@ import net.minecraft.util.text.TextComponentString;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-/** @author wxp */
+/** @author wxp 主要用于，游戏中系统命令。支持通过命令使用location. */
 public class LocationCommand extends CommandBase {
   private static final String LIST_COMMAND_STR = "list";
   private static final String SAVE_COMMAND_STR = "save";
@@ -35,7 +31,6 @@ public class LocationCommand extends CommandBase {
 
   @Override
   public String getUsage(ICommandSender sender) {
-    McHelper.getLogger().debug("Sender:{}", sender);
     return "commands.location.usage";
   }
 
@@ -147,8 +142,7 @@ public class LocationCommand extends CommandBase {
   }
 
   private void handleSaveCommand(
-      EntityPlayerMP entityPlayerMP, LocationCapability locationCapability, String[] args)
-      throws PlayerNotFoundException {
+      EntityPlayerMP entityPlayerMP, LocationCapability locationCapability, String[] args) {
     Location location = new Location();
     location.setAlias(args[1]);
     location.setPosition(entityPlayerMP.getPositionVector());
@@ -157,11 +151,7 @@ public class LocationCommand extends CommandBase {
     } else {
       location.setDesc("");
     }
-    locationCapability.saveLocation(entityPlayerMP.world, location);
-    LocationCapabilitySyncMessage locationCapabilitySyncMessage =
-        new LocationCapabilitySyncMessage(entityPlayerMP);
-    NetworkManager.sendTo(locationCapabilitySyncMessage, entityPlayerMP);
-    entityPlayerMP.sendMessage(new TextComponentString("done."));
+    LocationHelper.saveLocation(entityPlayerMP, locationCapability, location);
   }
 
   private void handleJumpCommand(

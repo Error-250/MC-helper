@@ -12,7 +12,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * @author wxp
+ * @author wxp 主要用于给用户附加location能力.配合类: LocationCapabilityProvider LocationCapabilityStorage
+ *     PlayerEventHandler#onPlayerClone EntityEventHandler#onAttachCapabilitiesEntity
+ *     EntityEventHandler#onPlayerJoinWorld Location CapabilityManager
  */
 public class LocationCapabilityProvider implements ICapabilitySerializable {
   private LocationCapability locationCapability = new LocationCapabilityImpl();
@@ -33,11 +35,13 @@ public class LocationCapabilityProvider implements ICapabilitySerializable {
 
   @Override
   public NBTBase serializeNBT() {
-    return CapabilityManager.locationCapabilityStorage.writeNBT(CapabilityManager.locationCapability, locationCapability, null);
+    return CapabilityManager.locationCapabilityStorage.writeNBT(
+        CapabilityManager.locationCapability, locationCapability, null);
   }
 
   @Override
   public void deserializeNBT(NBTBase nbt) {
-    CapabilityManager.locationCapabilityStorage.readNBT(CapabilityManager.locationCapability, locationCapability, null, nbt);
+    CapabilityManager.locationCapabilityStorage.readNBT(
+        CapabilityManager.locationCapability, locationCapability, null, nbt);
   }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-/** @author wxp */
+/** @author wxp 一组按钮, 给定一个宽高,生成一组按钮. */
 public class GuiButtonList {
   private int x;
   private int y;
@@ -26,15 +26,15 @@ public class GuiButtonList {
   private int textureHeight;
   private ResourceLocation buttonImage;
 
-  public GuiButtonList(
-      int x, int y, int width, int height, int buttonSize, int startId, List<String> texts) {
+  private int buttonDefaultHeight = 17;
+
+  public GuiButtonList(int x, int y, int width, int height, int buttonSize, int startId) {
     this.x = x;
     this.y = y;
     this.height = height;
     this.width = width;
     this.startId = startId;
     this.buttonSize = Math.min(buttonSize, getMaxButtonSize(height));
-    this.texts = texts;
     buttons = new ArrayList<>(this.buttonSize);
   }
 
@@ -129,6 +129,6 @@ public class GuiButtonList {
   }
 
   private int getMaxButtonSize(int height) {
-    return height / 17;
+    return height / buttonDefaultHeight;
   }
 }

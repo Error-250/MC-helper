@@ -4,7 +4,7 @@ import com.wxp.mod.mchelper.register.InputKeyRegister;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-/** @author wxp */
+/** @author wxp 客户端代理 */
 public class ClientProxy extends ServerProxy {
   @Override
   public void preInit(FMLPreInitializationEvent event) {

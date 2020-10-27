@@ -16,7 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author wxp
+ * @author wxp 主要负责location能力的持久化存储和读取。配合类: LocationCapabilityProvider LocationCapabilityStorage
+ *     PlayerEventHandler#onPlayerClone EntityEventHandler#onAttachCapabilitiesEntity
+ *     EntityEventHandler#onPlayerJoinWorld Location CapabilityManager
  */
 public class LocationCapabilityStorage implements Capability.IStorage<LocationCapability> {
   private static final String KEY_LOCATION_CAP = "location_saved";
@@ -32,7 +34,8 @@ public class LocationCapabilityStorage implements Capability.IStorage<LocationCa
 
   @Nullable
   @Override
-  public NBTBase writeNBT(Capability<LocationCapability> capability, LocationCapability instance, EnumFacing side) {
+  public NBTBase writeNBT(
+      Capability<LocationCapability> capability, LocationCapability instance, EnumFacing side) {
     NBTTagCompound base = new NBTTagCompound();
     NBTTagList mapList = new NBTTagList();
     for (Map.Entry<String, List<Location>> entry : instance.getPositionMap().entrySet()) {
@@ -58,7 +61,11 @@ public class LocationCapabilityStorage implements Capability.IStorage<LocationCa
   }
 
   @Override
-  public void readNBT(Capability<LocationCapability> capability, LocationCapability instance, EnumFacing side, NBTBase nbt) {
+  public void readNBT(
+      Capability<LocationCapability> capability,
+      LocationCapability instance,
+      EnumFacing side,
+      NBTBase nbt) {
     Map<String, List<Location>> locationMap = new HashMap<>();
     NBTTagCompound base = (NBTTagCompound) nbt;
     NBTTagList list = (NBTTagList) base.getTag(KEY_LOCATION_CAP);
@@ -72,7 +79,11 @@ public class LocationCapabilityStorage implements Capability.IStorage<LocationCa
         Location location = new Location();
         location.setAlias(locationNbt.getString(KEY_LOCATION_ALIAS));
         location.setDesc(locationNbt.getString(KEY_LOCATION_DESC));
-        location.setPosition(new Vec3d(locationNbt.getDouble(KEY_LOCATION_X), locationNbt.getDouble(KEY_LOCATION_Y), locationNbt.getDouble(KEY_LOCATION_Z)));
+        location.setPosition(
+            new Vec3d(
+                locationNbt.getDouble(KEY_LOCATION_X),
+                locationNbt.getDouble(KEY_LOCATION_Y),
+                locationNbt.getDouble(KEY_LOCATION_Z)));
         locations.add(location);
       }
       locationMap.put(worldName, locations);

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/** @author wxp */
+/** @author wxp 功能按键管理 */
 public class InputKeyManager {
   private static List<KeyBinding> registeredKeyBind;
   public static KeyBinding KEY_GUI_LOCATION;

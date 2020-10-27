@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-/** @author wxp */
+/** @author wxp 用于从客户端同步需要开启的ui的id */
 public class OpenGuiMessageHandler implements IMessageHandler<OpenGuiMessage, IMessage> {
   @Override
   public IMessage onMessage(OpenGuiMessage message, MessageContext ctx) {

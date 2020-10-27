@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-/** @author wxp */
+/** @author wxp 输入相关的事件。主要用于打开location的界面 */
 @Mod.EventBusSubscriber(modid = ModConfig.MOD_ID)
 public class InputEventHandler {
   @SubscribeEvent
@@ -31,8 +31,7 @@ public class InputEventHandler {
         if (locationCapability == null) {
           return;
         }
-        OpenGuiMessage openGuiMessage =
-            new OpenGuiMessage(ModHelperGuiHandler.ID_LOCATION_UI);
+        OpenGuiMessage openGuiMessage = new OpenGuiMessage(ModHelperGuiHandler.ID_LOCATION_UI);
         NetworkManager.sendToServer(openGuiMessage);
       }
     }

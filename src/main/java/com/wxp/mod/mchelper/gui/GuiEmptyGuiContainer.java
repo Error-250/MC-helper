@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/** @author wxp */
+/** @author wxp location客户端container */
 public class GuiEmptyGuiContainer extends GuiContainer {
   private static final ResourceLocation TEXTURE =
       new ResourceLocation(ModConfig.MOD_ID, "textures/gui/container/location_background.png");
@@ -95,14 +95,11 @@ public class GuiEmptyGuiContainer extends GuiContainer {
   }
 
   private void drawBottom(int middleOffsetX, int middleOffsetY) {
-    int pageSize =
-        this.container.getLocationCapability().locationPageSize(this.container.getPlayer().world);
     int controlWidth = (int) (this.xSize * 0.7);
     int startX = (this.xSize - controlWidth) / 2;
     leftPageButton =
         new GuiImageButton(
             1, middleOffsetX + startX, middleOffsetY + 135, 11, 17, 15, 176, TEXTURE);
-    leftPageButton.setEnable(currentPageSize != 1);
     leftPageButton.setDisEnableTextureOffset(15, 158);
     int inputFieldWidth = controlWidth - 52;
     pageInputField =
@@ -116,7 +113,6 @@ public class GuiEmptyGuiContainer extends GuiContainer {
     pageInputField.setBackgroundColor(0);
     pageInputField.setBorderColor(0);
     pageInputField.setDefaultText("1");
-    pageInputField.setPlaceholder(String.format("%s/%s", currentPageSize, pageSize));
     pageJumpButton =
         new GuiImageButton(
             3,
@@ -140,7 +136,6 @@ public class GuiEmptyGuiContainer extends GuiContainer {
             2,
             176,
             TEXTURE);
-    rightPageButton.setEnable(currentPageSize != pageSize);
     rightPageButton.setDisEnableTextureOffset(2, 158);
     saveButton =
         new GuiImageButton(
@@ -194,6 +189,7 @@ public class GuiEmptyGuiContainer extends GuiContainer {
             200,
             20,
             TEXTURE);
+    setPageControlButtonEnable();
 
     this.addButton(leftPageButton);
     this.addButton(pageJumpButton);
@@ -206,15 +202,11 @@ public class GuiEmptyGuiContainer extends GuiContainer {
 
   private void drawMiddle(int middleOffsetX, int middleOffsetY) {
     this.container.getLocationCapability().setPageSize(6);
-    List<String> texts =
-        this.container.getLocationCapability()
-            .listSavedLocations(this.container.getPlayer().world, this.currentPageSize).stream()
-            .map(Location::getAlias)
-            .collect(Collectors.toList());
-    buttonList = new GuiButtonList(3, 25, 169, 107, 6, 22, texts);
+    buttonList = new GuiButtonList(3, 25, 169, 107, 6, 22);
     buttonList.initGui(middleOffsetX, middleOffsetY);
     buttonList.setTexture(1, 168, 200, 20, TEXTURE);
     buttonList.getButtons().forEach(this::addButton);
+    setCurrentPageTexts();
 
     nameLabel =
         new GuiLabel(this.fontRenderer, 10, middleOffsetX + 10, middleOffsetY + 29, 30, 17, -1);
@@ -235,16 +227,12 @@ public class GuiEmptyGuiContainer extends GuiContainer {
 
     xLabel =
         new GuiLabel(this.fontRenderer, 14, middleOffsetX + 10, middleOffsetY + 65, 30, 17, -1);
-    xLabel.addLine(String.format("X坐标:%s", this.container.getPlayer().getPosition().getX()));
     yLabel =
         new GuiLabel(this.fontRenderer, 15, middleOffsetX + 10, middleOffsetY + 83, 30, 17, -1);
-    yLabel.addLine(String.format("Y坐标:%s", this.container.getPlayer().getPosition().getY()));
     zLabel =
         new GuiLabel(this.fontRenderer, 16, middleOffsetX + 10, middleOffsetY + 101, 30, 17, -1);
-    zLabel.addLine(String.format("Z坐标:%s", this.container.getPlayer().getPosition().getZ()));
     distanceLabel =
         new GuiLabel(this.fontRenderer, 18, middleOffsetX + 10, middleOffsetY + 119, 30, 17, -1);
-    distanceLabel.addLine(String.format("距离:%s", ""));
     this.labelList.add(nameLabel);
     this.labelList.add(descLabel);
     this.labelList.add(xLabel);
@@ -271,7 +259,6 @@ public class GuiEmptyGuiContainer extends GuiContainer {
             6, middleOffsetX + 135, middleOffsetY + 5, 35, 17, "新建", 1, 168, 200, 20, TEXTURE);
     this.addButton(allowNearestButton);
     this.addButton(newLocationButton);
-    //    this.labelList.add(allowNearestLabel);
 
     backButton =
         new GuiImageButton(8, middleOffsetX + 6, middleOffsetY + 6, 20, 17, 30, 177, TEXTURE);
@@ -443,12 +430,7 @@ public class GuiEmptyGuiContainer extends GuiContainer {
         this.currentPageSize = 1;
       }
       setPageControlButtonEnable();
-      List<String> texts =
-          this.container.getLocationCapability()
-              .listSavedLocations(this.container.getPlayer().world, this.currentPageSize).stream()
-              .map(Location::getAlias)
-              .collect(Collectors.toList());
-      buttonList.setTexts(texts);
+      setCurrentPageTexts();
     } else if (button.id == rightPageButton.id) {
       this.currentPageSize++;
       int pageSize =
@@ -457,12 +439,7 @@ public class GuiEmptyGuiContainer extends GuiContainer {
         this.currentPageSize = pageSize;
       }
       setPageControlButtonEnable();
-      List<String> texts =
-          this.container.getLocationCapability()
-              .listSavedLocations(this.container.getPlayer().world, this.currentPageSize).stream()
-              .map(Location::getAlias)
-              .collect(Collectors.toList());
-      buttonList.setTexts(texts);
+      setCurrentPageTexts();
     } else if (button.id == pageJumpButton.id) {
       int pageSize =
           this.container.getLocationCapability().locationPageSize(this.container.getPlayer().world);
@@ -476,12 +453,7 @@ public class GuiEmptyGuiContainer extends GuiContainer {
       }
       this.currentPageSize = inputPage;
       setPageControlButtonEnable();
-      List<String> texts =
-          this.container.getLocationCapability()
-              .listSavedLocations(this.container.getPlayer().world, this.currentPageSize).stream()
-              .map(Location::getAlias)
-              .collect(Collectors.toList());
-      buttonList.setTexts(texts);
+      setCurrentPageTexts();
     } else if (button.id == backButton.id) {
       this.currentUi = mainUi;
     } else if (button.id == saveButton.id) {
@@ -559,5 +531,13 @@ public class GuiEmptyGuiContainer extends GuiContainer {
     leftPageButton.setEnable(currentPageSize != 1);
     rightPageButton.setEnable(currentPageSize != pageSize);
     pageInputField.setPlaceholder(String.format("%s/%s", this.currentPageSize, pageSize));
+  }
+
+  private void setCurrentPageTexts() {
+    buttonList.setTexts(
+        this.container.getLocationCapability()
+            .listSavedLocations(this.container.getPlayer().world, this.currentPageSize).stream()
+            .map(Location::getAlias)
+            .collect(Collectors.toList()));
   }
 }

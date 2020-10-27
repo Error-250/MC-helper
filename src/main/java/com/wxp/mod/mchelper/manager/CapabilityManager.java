@@ -6,16 +6,16 @@ import com.wxp.mod.mchelper.capability.storage.LocationCapabilityStorage;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
-/**
- * @author wxp
- */
+/** @author wxp 能力管理 */
 public class CapabilityManager {
   @CapabilityInject(LocationCapability.class)
   public static Capability<LocationCapability> locationCapability;
 
-  public static LocationCapabilityStorage locationCapabilityStorage = new LocationCapabilityStorage();
+  public static LocationCapabilityStorage locationCapabilityStorage =
+      new LocationCapabilityStorage();
 
   public static void initCapability() {
-    net.minecraftforge.common.capabilities.CapabilityManager.INSTANCE.register(LocationCapability.class, locationCapabilityStorage, LocationCapabilityImpl::new);
+    net.minecraftforge.common.capabilities.CapabilityManager.INSTANCE.register(
+        LocationCapability.class, locationCapabilityStorage, LocationCapabilityImpl::new);
   }
 }

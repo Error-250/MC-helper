@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import javax.annotation.Nullable;
 
-/** @author wxp */
+/** @author wxp gui管理 */
 public class ModHelperGuiHandler implements IGuiHandler {
   public static final int ID_LOCATION_UI = 1;
 

@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-/** @author wxp */
+/** @author wxp 主要用于从客户端到服务端同步location的变更数据. */
 public class LocationUpdateMessageHandler
     implements IMessageHandler<LocationUpdateMessage, IMessage> {
   @Override
@@ -56,24 +56,23 @@ public class LocationUpdateMessageHandler
                   case ADD:
                     if (LocationUpdateData.SupportUpdateField.LOCATION.equals(
                         updateData.getField())) {
-                      String errMsg =
-                          locationCapability.saveLocation(playerMP.world, updateData.getLocation());
-                      if (!StringUtils.isNullOrEmpty(errMsg)) {
-                        playerMP.sendMessage(new TextComponentString(errMsg));
-                      } else {
-                        LocationCapabilitySyncMessage locationCapabilitySyncMessage =
-                            new LocationCapabilitySyncMessage(playerMP);
-                        NetworkManager.sendTo(locationCapabilitySyncMessage, playerMP);
-                      }
+                      LocationHelper.saveLocation(
+                          playerMP, locationCapability, updateData.getLocation());
                     }
                     break;
                   case JUMP:
-                    LocationHelper.jumpToLocation(
-                        playerMP, locationCapability, updateData.getLocation().getAlias());
+                    if (LocationUpdateData.SupportUpdateField.LOCATION.equals(
+                        updateData.getField())) {
+                      LocationHelper.jumpToLocation(
+                          playerMP, locationCapability, updateData.getLocation().getAlias());
+                    }
                     break;
                   case DELETE:
-                    LocationHelper.deleteLocation(
-                        playerMP, locationCapability, updateData.getLocation().getAlias());
+                    if (LocationUpdateData.SupportUpdateField.LOCATION.equals(
+                        updateData.getField())) {
+                      LocationHelper.deleteLocation(
+                          playerMP, locationCapability, updateData.getLocation().getAlias());
+                    }
                     break;
                   default:
                 }

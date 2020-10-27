@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
-/** @author wxp */
+/** @author wxp 帮助修改label的text */
 public class GuiLabelHelper {
 
   public static void setText(GuiLabel label, String text) {

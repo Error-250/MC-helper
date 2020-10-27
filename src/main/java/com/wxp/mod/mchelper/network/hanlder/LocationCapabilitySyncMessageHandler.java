@@ -1,6 +1,5 @@
 package com.wxp.mod.mchelper.network.hanlder;
 
-import com.wxp.mod.mchelper.McHelper;
 import com.wxp.mod.mchelper.capability.LocationCapability;
 import com.wxp.mod.mchelper.manager.CapabilityManager;
 import com.wxp.mod.mchelper.network.LocationCapabilitySyncMessage;

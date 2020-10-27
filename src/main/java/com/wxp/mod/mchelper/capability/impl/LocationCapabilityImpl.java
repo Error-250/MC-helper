@@ -8,7 +8,11 @@ import net.minecraft.world.World;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/** @author wxp */
+/**
+ * @author wxp 实现location能力. 不同世界,分别存储。 配合类: LocationCapabilityProvider LocationCapabilityStorage
+ *     PlayerEventHandler#onPlayerClone EntityEventHandler#onAttachCapabilitiesEntity
+ *     EntityEventHandler#onPlayerJoinWorld Location CapabilityManager
+ */
 public class LocationCapabilityImpl implements LocationCapability {
   private Map<String, List<Location>> positions = new HashMap<>();
   private int pageSize = 8;

@@ -3,7 +3,7 @@ package com.wxp.mod.mchelper.gui.component.textfield;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
 
-/** @author wxp */
+/** @author wxp 自定义输入框, 支持placeholder */
 public class GuiInputTextField extends GuiTextField {
   private String placeholder = "";
   private String defaultText = "";

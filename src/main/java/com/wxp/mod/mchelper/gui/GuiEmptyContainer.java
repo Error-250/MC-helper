@@ -5,7 +5,7 @@ import com.wxp.mod.mchelper.manager.CapabilityManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 
-/** @author wxp */
+/** @author wxp location服务端container */
 public class GuiEmptyContainer extends Container {
   private EntityPlayer player;
   private LocationCapability locationCapability;

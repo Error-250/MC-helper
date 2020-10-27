@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-/** @author wxp */
+/** @author wxp 网络管理 */
 public class NetworkManager {
   private static SimpleNetworkWrapper simpleNetworkWrapper =
       NetworkRegistry.INSTANCE.newSimpleChannel(ModConfig.MOD_ID);
