@@ -19,6 +19,10 @@ public class OreDictionaryHelper {
     return containsBlock(WOOD, block) || containsBlock(LEAVES, block);
   }
 
+  public static boolean isOriginWood(Block block) {
+    return containsBlock(WOOD, block);
+  }
+
   public static boolean isOre(Block block) {
     return containsBlock(ORE_GOLD, block)
         || containsBlock(ORE_IRON, block)

@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "mc-helper:blocks/farm_keeper_top",
+    "front": "mc-helper:blocks/farm_keeper_front",
+    "side": "mc-helper:blocks/farm_keeper_side"
+  }
+}

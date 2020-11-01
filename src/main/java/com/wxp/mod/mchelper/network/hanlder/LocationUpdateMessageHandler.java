@@ -9,8 +9,6 @@ import com.wxp.mod.mchelper.manager.NetworkManager;
 import com.wxp.mod.mchelper.network.LocationCapabilitySyncMessage;
 import com.wxp.mod.mchelper.network.LocationUpdateMessage;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.StringUtils;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;

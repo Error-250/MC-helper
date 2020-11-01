@@ -1,4 +1,4 @@
-package com.wxp.mod.mchelper.gui;
+package com.wxp.mod.mchelper.gui.container;
 
 import com.wxp.mod.mchelper.capability.LocationCapability;
 import com.wxp.mod.mchelper.manager.CapabilityManager;

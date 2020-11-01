@@ -1,0 +1,11 @@
+# item
+item.farm_keeper.name=农场监视者
+
+# item group
+itemGroup.mc-helper=Mc 辅助
+
+# block
+tile.farm_keeper.name=农场监视者
+
+# key
+key.supernatural=Show supernatural

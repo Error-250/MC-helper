@@ -3,10 +3,8 @@ package com.wxp.mod.mchelper.manager;
 import com.wxp.mod.mchelper.McHelper;
 import com.wxp.mod.mchelper.config.ModConfig;
 import com.wxp.mod.mchelper.gui.ModHelperGuiHandler;
-import com.wxp.mod.mchelper.network.AbstractNbtMessage;
-import com.wxp.mod.mchelper.network.LocationCapabilitySyncMessage;
-import com.wxp.mod.mchelper.network.LocationUpdateMessage;
-import com.wxp.mod.mchelper.network.OpenGuiMessage;
+import com.wxp.mod.mchelper.network.*;
+import com.wxp.mod.mchelper.network.hanlder.BlockStateSwitchMessageHandler;
 import com.wxp.mod.mchelper.network.hanlder.LocationCapabilitySyncMessageHandler;
 import com.wxp.mod.mchelper.network.hanlder.LocationUpdateMessageHandler;
 import com.wxp.mod.mchelper.network.hanlder.OpenGuiMessageHandler;
@@ -36,6 +34,8 @@ public class NetworkManager {
         OpenGuiMessageHandler.class, OpenGuiMessage.class, 1, Side.SERVER);
     simpleNetworkWrapper.registerMessage(
         LocationUpdateMessageHandler.class, LocationUpdateMessage.class, 2, Side.SERVER);
+    simpleNetworkWrapper.registerMessage(
+        BlockStateSwitchMessageHandler.class, BlockStateSwitchMessage.class, 3, Side.SERVER);
   }
 
   public static void sendTo(AbstractNbtMessage message, EntityPlayerMP playerMP) {

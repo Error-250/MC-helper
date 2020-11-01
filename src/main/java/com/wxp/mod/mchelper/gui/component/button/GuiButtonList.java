@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -49,6 +50,9 @@ public class GuiButtonList {
   }
 
   public void initGui(int middleX, int middleY) {
+    if (texts == null) {
+      texts = Collections.emptyList();
+    }
     Stream.iterate(0, (i -> i + 1))
         .limit(this.buttonSize)
         .forEach(

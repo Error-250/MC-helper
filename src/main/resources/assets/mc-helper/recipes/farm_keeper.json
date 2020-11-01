@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xnx",
+    "nmn",
+    "xnx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:iron_ingot"
+    },
+    "m": {
+      "item": "minecraft:redstone"
+    },
+    "n": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "result": {
+    "item": "mc-helper:farm_keeper",
+    "count": 1
+  }
+}

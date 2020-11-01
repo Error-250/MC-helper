@@ -2,9 +2,7 @@ package com.wxp.mod.mchelper;
 
 import com.wxp.mod.mchelper.command.LocationCommand;
 import com.wxp.mod.mchelper.config.ModConfig;
-import com.wxp.mod.mchelper.manager.CapabilityManager;
-import com.wxp.mod.mchelper.manager.InputKeyManager;
-import com.wxp.mod.mchelper.manager.NetworkManager;
+import com.wxp.mod.mchelper.manager.*;
 import com.wxp.mod.mchelper.proxy.ServerProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -31,9 +29,12 @@ public class McHelper {
   public void preInit(FMLPreInitializationEvent event) {
     logger = event.getModLog();
     modProxy.preInit(event);
+    BlockManager.initBlock();
+    ItemManager.initItem();
     CapabilityManager.initCapability();
     NetworkManager.initNetwork();
     InputKeyManager.initKey();
+    FakePlayerManager.initFakePlayer();
   }
 
   @Mod.EventHandler

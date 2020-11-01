@@ -1,4 +1,4 @@
-package com.wxp.mod.mchelper.gui;
+package com.wxp.mod.mchelper.gui.guicontainer;
 
 import com.wxp.mod.mchelper.config.ModConfig;
 import com.wxp.mod.mchelper.domain.Location;
@@ -8,23 +8,21 @@ import com.wxp.mod.mchelper.gui.component.button.GuiButtonList;
 import com.wxp.mod.mchelper.gui.component.button.GuiImageButton;
 import com.wxp.mod.mchelper.gui.component.helper.GuiLabelHelper;
 import com.wxp.mod.mchelper.gui.component.textfield.GuiInputTextField;
+import com.wxp.mod.mchelper.gui.container.GuiEmptyContainer;
 import com.wxp.mod.mchelper.manager.NetworkManager;
 import com.wxp.mod.mchelper.network.LocationUpdateMessage;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiButtonToggle;
 import net.minecraft.client.gui.GuiLabel;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author wxp location客户端container */
-public class GuiEmptyGuiContainer extends GuiContainer {
+public class GuiEmptyGuiContainer extends AbstractGuiContainer {
   private static final ResourceLocation TEXTURE =
       new ResourceLocation(ModConfig.MOD_ID, "textures/gui/container/location_background.png");
   private GuiImageButton leftPageButton;
@@ -58,21 +56,17 @@ public class GuiEmptyGuiContainer extends GuiContainer {
 
   public GuiEmptyGuiContainer(GuiEmptyContainer inventorySlotsIn) {
     super(inventorySlotsIn);
-    this.xSize = 176;
-    this.ySize = 156;
     this.container = inventorySlotsIn;
   }
 
   @Override
+  ResourceLocation getBackgroundResource() {
+    return TEXTURE;
+  }
+
+  @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    GlStateManager.color(1.0F, 1.0F, 1.0F);
-
-    this.mc.getTextureManager().bindTexture(TEXTURE);
-    int middleOffsetX = (this.width - this.xSize) / 2;
-    int middleOffsetY = (this.height - this.ySize) / 2;
-
-    this.drawTexturedModalRect(middleOffsetX, middleOffsetY, 0, 0, this.xSize, this.ySize);
-
+    super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
     if (this.currentUi == mainUi) {
       this.pageInputField.drawTextBox();
       // 规避label + button的bug
