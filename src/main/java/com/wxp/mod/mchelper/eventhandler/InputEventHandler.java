@@ -23,7 +23,7 @@ public class InputEventHandler {
     if (Side.SERVER.equals(FMLCommonHandler.instance().getSide())) {
       return;
     }
-    if (InputKeyManager.KEY_GUI_LOCATION.isPressed()) {
+    if (ModConfig.functionControl.enableLocation && InputKeyManager.KEY_GUI_LOCATION.isPressed()) {
       EntityPlayer player = Minecraft.getMinecraft().player;
       if (player.hasCapability(CapabilityManager.locationCapability, null)) {
         LocationCapability locationCapability =

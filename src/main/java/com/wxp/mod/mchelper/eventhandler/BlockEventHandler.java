@@ -25,20 +25,23 @@ public class BlockEventHandler {
       return;
     }
     Block targetBlock = event.getState().getBlock();
-    if (OreDictionaryHelper.isTree(targetBlock)) {
+    if (ModConfig.functionControl.enableAutoHarvestTree
+        && OreDictionaryHelper.isTree(targetBlock)) {
       // 一键撸树
       Arrays.stream(EnumFacing.values())
           .forEach(
               facing ->
                   autoCutDownTree(event.getPos(), event.getWorld(), event.getHarvester(), facing));
-    } else if (OreDictionaryHelper.isOre(targetBlock)) {
+    } else if (ModConfig.functionControl.enableAutoHarvestOre
+        && OreDictionaryHelper.isOre(targetBlock)) {
       // 一键挖矿
       Arrays.stream(EnumFacing.values())
           .forEach(
               facing ->
                   autoHarvestOre(
                       event.getPos(), event.getWorld(), event.getHarvester(), facing, targetBlock));
-    } else if (Blocks.OBSIDIAN.equals(targetBlock)) {
+    } else if (ModConfig.functionControl.enableAutoHarvestObsidian
+        && Blocks.OBSIDIAN.equals(targetBlock)) {
       // 一键挖黑曜石(不在岩浆上的)
       EnumFacing playerFacing = event.getHarvester().getHorizontalFacing();
       Arrays.stream(EnumFacing.HORIZONTALS)

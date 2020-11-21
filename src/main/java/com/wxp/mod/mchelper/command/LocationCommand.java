@@ -2,6 +2,7 @@ package com.wxp.mod.mchelper.command;
 
 import com.google.common.collect.Lists;
 import com.wxp.mod.mchelper.capability.LocationCapability;
+import com.wxp.mod.mchelper.config.ModConfig;
 import com.wxp.mod.mchelper.domain.Location;
 import com.wxp.mod.mchelper.helper.LocationHelper;
 import com.wxp.mod.mchelper.manager.CapabilityManager;
@@ -42,6 +43,9 @@ public class LocationCommand extends CommandBase {
         entityPlayerMP.getCapability(CapabilityManager.locationCapability, null);
     if (locationCapability == null) {
       entityPlayerMP.sendMessage(new TextComponentString("Command cannot us on this player."));
+      return;
+    }
+    if (!ModConfig.functionControl.enableLocation) {
       return;
     }
     switch (args.length) {
