@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " x ",
+    "nmn",
+    "nmn"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:book"
+    },
+    "m": {
+      "item": "minecraft:obsidian"
+    },
+    "n": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "mc-helper:enchantment_block",
+    "count": 1
+  }
+}

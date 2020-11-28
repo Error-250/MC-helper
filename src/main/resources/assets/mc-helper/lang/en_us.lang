@@ -6,6 +6,7 @@ itemGroup.mc-helper=Mc helper
 
 # block
 tile.farm_keeper.name=Farm keeper
+tile.enchantment_block.name=Magic enchanting table
 
 # key
 key.supernatural=Show supernatural

@@ -6,6 +6,7 @@ itemGroup.mc-helper=Mc 辅助
 
 # block
 tile.farm_keeper.name=农场监视者
+tile.enchantment_block.name=神奇的附魔台
 
 # key
 key.supernatural=Show supernatural

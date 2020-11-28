@@ -1,9 +1,13 @@
 package com.wxp.mod.mchelper.gui;
 
+import com.wxp.mod.mchelper.McHelper;
+import com.wxp.mod.mchelper.block.tileentity.TileEntityEnchantment;
 import com.wxp.mod.mchelper.block.tileentity.TileEntityFarmKeeper;
 import com.wxp.mod.mchelper.gui.container.GuiEmptyContainer;
+import com.wxp.mod.mchelper.gui.container.GuiEnchantmentContainer;
 import com.wxp.mod.mchelper.gui.container.GuiFarmKeeperContainer;
 import com.wxp.mod.mchelper.gui.guicontainer.GuiEmptyGuiContainer;
+import com.wxp.mod.mchelper.gui.guicontainer.GuiEnchantmentGuiContainer;
 import com.wxp.mod.mchelper.gui.guicontainer.GuiFarmKeeperGuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -16,6 +20,7 @@ import javax.annotation.Nullable;
 public class ModHelperGuiHandler implements IGuiHandler {
   public static final int ID_LOCATION_UI = 1;
   public static final int ID_FARM_KEEPER_UI = 2;
+  public static final int ID_ENCHANTMENT_UI = 3;
 
   @Nullable
   @Override
@@ -26,6 +31,10 @@ public class ModHelperGuiHandler implements IGuiHandler {
     if (ID == ID_FARM_KEEPER_UI) {
       return new GuiFarmKeeperContainer(
           player, (TileEntityFarmKeeper) world.getTileEntity(new BlockPos(x, y, z)));
+    }
+    if (ID == ID_ENCHANTMENT_UI) {
+      return new GuiEnchantmentContainer(
+          player, (TileEntityEnchantment) world.getTileEntity(new BlockPos(x, y, z)));
     }
     return null;
   }
@@ -40,6 +49,11 @@ public class ModHelperGuiHandler implements IGuiHandler {
       return new GuiFarmKeeperGuiContainer(
           new GuiFarmKeeperContainer(
               player, (TileEntityFarmKeeper) world.getTileEntity(new BlockPos(x, y, z))));
+    }
+    if (ID == ID_ENCHANTMENT_UI) {
+      return new GuiEnchantmentGuiContainer(
+          new GuiEnchantmentContainer(
+              player, (TileEntityEnchantment) world.getTileEntity(new BlockPos(x, y, z))));
     }
     return null;
   }

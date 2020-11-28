@@ -26,7 +26,7 @@ public class BlockEventHandler {
     }
     Block targetBlock = event.getState().getBlock();
     if (ModConfig.functionControl.enableAutoHarvestTree
-        && OreDictionaryHelper.isTree(targetBlock)) {
+        && (OreDictionaryHelper.isTree(targetBlock))) {
       // 一键撸树
       Arrays.stream(EnumFacing.values())
           .forEach(

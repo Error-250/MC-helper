@@ -491,13 +491,14 @@ public class GuiEmptyGuiContainer extends AbstractGuiContainer {
       NetworkManager.sendToServer(new LocationUpdateMessage(updateData));
       this.container.getPlayer().closeScreen();
     } else {
-      String matchName = buttonList.actionPerformed(button.id);
-      if (!StringUtils.isNullOrEmpty(matchName)) {
+      int index = buttonList.actionPerformed(button.id);
+      if (index != -1) {
         // 初始化内容
         Location matchLocation =
             this.container
                 .getLocationCapability()
-                .getLocationByAlias(this.container.getPlayer().world, matchName);
+                .getLocationByAlias(
+                    this.container.getPlayer().world, buttonList.getTexts().get(index));
         if (matchLocation == null) {
           return;
         }

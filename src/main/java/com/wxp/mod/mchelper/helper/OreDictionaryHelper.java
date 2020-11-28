@@ -1,5 +1,6 @@
 package com.wxp.mod.mchelper.helper;
 
+import com.wxp.mod.mchelper.config.ModConfig;
 import net.minecraft.block.Block;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -16,7 +17,10 @@ public class OreDictionaryHelper {
   private static final String ORE_COAL = "oreCoal";
 
   public static boolean isTree(Block block) {
-    return containsBlock(WOOD, block) || containsBlock(LEAVES, block);
+    return containsBlock(WOOD, block)
+        || containsBlock(LEAVES, block)
+        || (ModConfig.functionControl.enableAllWood
+            && (block.isWood(null, null) || block.isLeaves(block.getDefaultState(), null, null)));
   }
 
   public static boolean isOriginWood(Block block) {

@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "mc-helper:enchantment_block"
+  },
+  "variants" : {
+    "normal": [{}],
+    "facing": {
+      "east": { "y": 90, "uvlock": true },
+      "north": {},
+      "south": { "y": 180, "uvlock": true },
+      "west": { "y": 270, "uvlock": true }
+    }
+  }
+}

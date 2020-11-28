@@ -27,6 +27,10 @@ public class GuiButtonList {
   private int textureHeight;
   private ResourceLocation buttonImage;
 
+  private boolean setDisableTexture = false;
+  private int disableXOffset;
+  private int disableYOffset;
+
   private int buttonDefaultHeight = 17;
 
   public GuiButtonList(int x, int y, int width, int height, int buttonSize, int startId) {
@@ -47,6 +51,12 @@ public class GuiButtonList {
     this.textureWidth = textureWidth;
     this.textureHeight = textureHeight;
     this.buttonImage = texture;
+  }
+
+  public void setDisableTexture(int disableXOffset, int disableYOffset) {
+    setDisableTexture = true;
+    this.disableXOffset = disableXOffset;
+    this.disableYOffset = disableYOffset;
   }
 
   public void initGui(int middleX, int middleY) {
@@ -78,6 +88,9 @@ public class GuiButtonList {
                 if (StringUtils.isNullOrEmpty(text)) {
                   guiImageButton.visible = false;
                 }
+                if (setDisableTexture) {
+                  guiImageButton.setDisEnableTextureOffset(disableXOffset, disableYOffset);
+                }
                 buttons.add(guiImageButton);
               } else {
                 GuiButton guiButton =
@@ -108,13 +121,13 @@ public class GuiButtonList {
     }
   }
 
-  public String actionPerformed(int buttonId) {
+  public int actionPerformed(int buttonId) {
     GuiButton matchButton =
         buttons.stream().filter(button -> button.id == buttonId).findFirst().orElse(null);
     if (matchButton != null) {
-      return texts.get(matchButton.id - startId);
+      return matchButton.id - startId;
     }
-    return null;
+    return -1;
   }
 
   public void setTexts(List<String> texts) {
@@ -130,6 +143,21 @@ public class GuiButtonList {
                 buttons.get(num).visible = false;
               }
             });
+  }
+
+  public void batchSetEnable(List<Boolean> enableSets) {
+    Stream.iterate(0, (i -> i + 1))
+        .limit(buttonSize)
+        .forEach(
+            num -> {
+              if (num < enableSets.size()) {
+                buttons.get(num).enabled = enableSets.get(num);
+              }
+            });
+  }
+
+  public List<String> getTexts() {
+    return texts;
   }
 
   private int getMaxButtonSize(int height) {

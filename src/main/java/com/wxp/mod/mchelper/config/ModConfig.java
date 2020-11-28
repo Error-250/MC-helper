@@ -15,6 +15,9 @@ public class ModConfig {
     @Config.Comment("是否啟用一鍵擼樹")
     public boolean enableAutoHarvestTree = false;
 
+    @Config.Comment("是否允许一键撸树对一切wood")
+    public boolean enableAllWood = false;
+
     @Config.Comment("是否啟用一鍵挖礦")
     public boolean enableAutoHarvestOre = false;
 
@@ -23,5 +26,8 @@ public class ModConfig {
 
     @Config.Comment("是否啟用位置功能")
     public boolean enableLocation = false;
+
+    @Config.Comment("是否启用神奇的附魔台")
+    public boolean enableEnchant = false;
   }
 }

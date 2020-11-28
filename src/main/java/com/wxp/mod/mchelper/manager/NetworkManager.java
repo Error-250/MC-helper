@@ -4,10 +4,7 @@ import com.wxp.mod.mchelper.McHelper;
 import com.wxp.mod.mchelper.config.ModConfig;
 import com.wxp.mod.mchelper.gui.ModHelperGuiHandler;
 import com.wxp.mod.mchelper.network.*;
-import com.wxp.mod.mchelper.network.hanlder.BlockStateSwitchMessageHandler;
-import com.wxp.mod.mchelper.network.hanlder.LocationCapabilitySyncMessageHandler;
-import com.wxp.mod.mchelper.network.hanlder.LocationUpdateMessageHandler;
-import com.wxp.mod.mchelper.network.hanlder.OpenGuiMessageHandler;
+import com.wxp.mod.mchelper.network.hanlder.*;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -36,6 +33,8 @@ public class NetworkManager {
         LocationUpdateMessageHandler.class, LocationUpdateMessage.class, 2, Side.SERVER);
     simpleNetworkWrapper.registerMessage(
         BlockStateSwitchMessageHandler.class, BlockStateSwitchMessage.class, 3, Side.SERVER);
+    simpleNetworkWrapper.registerMessage(
+        EnchantmentMessageHandler.class, EnchantmentMessage.class, 4, Side.SERVER);
   }
 
   public static void sendTo(AbstractNbtMessage message, EntityPlayerMP playerMP) {

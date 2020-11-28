@@ -1,6 +1,6 @@
 package com.wxp.mod.mchelper.register;
 
-import com.wxp.mod.mchelper.block.CommonBlockI;
+import com.wxp.mod.mchelper.block.CommonBlock;
 import com.wxp.mod.mchelper.config.ModConfig;
 import com.wxp.mod.mchelper.manager.BlockManager;
 import net.minecraft.block.Block;
@@ -15,12 +15,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BlockRegister {
   @SubscribeEvent
   public static void registerBlock(RegistryEvent.Register<Block> event) {
-    for (CommonBlockI commonBlockI : BlockManager.getInitializedBlock()) {
-      event.getRegistry().register(commonBlockI.getSelf());
-      if (commonBlockI.hasTileEntity(null)) {
+    for (CommonBlock commonBlock : BlockManager.getInitializedBlock()) {
+      event.getRegistry().register(commonBlock);
+      if (commonBlock.hasTileEntity(null)) {
         GameRegistry.registerTileEntity(
-            commonBlockI.getTileEntityClass(),
-            new ResourceLocation(ModConfig.MOD_ID, commonBlockI.getTileEntityClass().getName()));
+            commonBlock.getTileEntityClass(),
+            new ResourceLocation(ModConfig.MOD_ID, commonBlock.getTileEntityClass().getName()));
       }
     }
   }

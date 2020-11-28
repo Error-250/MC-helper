@@ -20,11 +20,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.Objects;
 
 /** @author wxp */
-public class FarmKeeperBlock extends Block implements CommonBlockI {
+public class FarmKeeperBlock extends CommonBlock {
   private final String name = "farm_keeper";
   public static final PropertyDirection FACING =
       PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -35,18 +34,6 @@ public class FarmKeeperBlock extends Block implements CommonBlockI {
     setUnlocalizedName(name);
     this.setDefaultState(
         this.getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
-  }
-
-  @Override
-  public ItemBlock getItemBlock() {
-    ItemBlock itemBlock = new ItemBlock(this);
-    itemBlock.setRegistryName(Objects.requireNonNull(this.getRegistryName()));
-    return itemBlock;
-  }
-
-  @Override
-  public Block getSelf() {
-    return this;
   }
 
   @Override
